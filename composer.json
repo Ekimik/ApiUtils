@@ -1,0 +1,21 @@
+{
+    "name": "Ekimik/ApiUtils",
+    "description": "Simple bundle of util classes created to simplify work with https://github.com/drahak/Restful.",
+    "authors": [
+        {
+            "name": "Jan Jíša",
+            "email": "j.jisa@seznam.cz",
+            "homepage": "http://www.janjisa.cz"
+        }
+    ],
+    "config": {
+        "vendor-dir": "libs"
+    },
+    "require": {
+        "php": ">= 5.6",
+        "nette/utils": "2.4.1",
+        "nette/robot-loader": "2.4.1",
+        "phpunit/phpunit": "5.7.2",
+        "drahak/restful": "dev-master"
+    }
+}
