@@ -17,9 +17,10 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase {
      * @covers Description::getInfoAboutResource
      */
     public function testDescription() {
-        $desc = new Description();
+        $desc = new Description('fooResource');
 
         $descDef = [
+            'name' => 'fooResource',
             'description' => null,
             'actions' => []
         ];
@@ -27,6 +28,7 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase {
 
         $desc->setResourceDescription('Some resource desc');
         $descDef = [
+            'name' => 'fooResource',
             'description' => 'Some resource desc',
             'actions' => []
         ];
@@ -35,6 +37,7 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase {
         $desc->addResourceAction(new Action('Foo action', 'PUT', 'Foo desc'));
         $desc->addResourceAction(new Action('Foobar action', 'DELETE', 'Foobar desc'));
         $descDef = [
+            'name' => 'fooResource',
             'description' => 'Some resource desc',
             'actions' => [
                 [
