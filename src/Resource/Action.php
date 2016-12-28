@@ -32,7 +32,7 @@ class Action implements IAction {
         }
     }
 
-    public function addParam(string $name, string $type, array $aditionalInfo) {
+    public function addParam(string $name, string $type, array $aditionalInfo = []) {
         $paramDefinition = [
             'type' => $type,
             'additionalInfo' => $aditionalInfo,
