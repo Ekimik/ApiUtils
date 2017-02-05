@@ -17,6 +17,10 @@ class Base implements IActionValidator {
     /** @var ValidatorFactory */
     protected $valueValidatorFactory;
 
+    public function __construct() {
+        $this->init();
+    }
+
     protected function init() {
 
     }
