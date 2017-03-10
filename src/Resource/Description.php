@@ -2,17 +2,15 @@
 
 namespace Ekimik\ApiUtils\Resource;
 
-use \Nette\Object;
-
 /**
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class Description extends Object implements IDescription {
+class Description implements IDescription {
 
     protected $aboutInfo = [
-        'name' => null,
-        'description' => null,
+        'name' => NULL,
+        'description' => NULL,
         'actions' => []
     ];
 
@@ -22,6 +20,10 @@ class Description extends Object implements IDescription {
 
     public function addResourceAction(IAction $action) {
         $this->aboutInfo['actions'][] = $action->getActionDefinition();
+    }
+
+    public function getActions(): array {
+	return $this->aboutInfo['actions'];
     }
 
     public function getInfoAboutResource(): array {

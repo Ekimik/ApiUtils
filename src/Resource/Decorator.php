@@ -2,14 +2,13 @@
 
 namespace Ekimik\ApiUtils\Resource;
 
-use \Nette\Object,
-    \Drahak\Restful\IResource;
+use \Drahak\Restful\IResource;
 
 /**
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class Decorator extends Object {
+class Decorator {
 
     /** @var IResource */
     protected $resource;
