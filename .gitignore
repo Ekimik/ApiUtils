@@ -1,4 +1,3 @@
 # general ignores, rest is in .gitignore files in specific dirs
 libs
 nbproject/
-composer.lock
