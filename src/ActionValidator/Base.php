@@ -2,22 +2,28 @@
 
 namespace Ekimik\ApiUtils\ActionValidator;
 
+use \Ekimik\ApiDesc\Resource\Action;
+use \Ekimik\ApiDesc\Param\Request as RequestParam;
+use \Ekimik\ApiUtils\Resource\Request;
+use \Ekimik\Validators\ValidatorFactory;
+
 /**
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package ClubManager\AuthApi
  */
 class Base implements IActionValidator {
 
-    const REQUIRED_FIELDS_ALL = 'all';
-
     protected $errors = [];
-    protected $requiredFields = [self::REQUIRED_FIELDS_ALL];
-    protected $allowedFields = [];
 
     /** @var ValidatorFactory */
-    protected $valueValidatorFactory;
+    protected $vf;
+    /** @var Action */
+    protected $action;
 
-    public function __construct() {
+    public function __construct(Action $action, ValidatorFactory $vf) {
+	$this->action = $action;
+	$this->vf = $vf;
+
         $this->init();
     }
 
@@ -29,24 +35,44 @@ class Base implements IActionValidator {
         return $this->errors;
     }
 
-    /**
-     * Check if all fields in input data is not empty, override to do some magic
-     * @param array $inputData
-     */
-    public function validate(array &$inputData) {
-        $allowedFields = $this->getAllowedInputFields();
-        $this->completeInputData($inputData);
+    public function validate(Request $r) {
+	$this->clearErrors();
+	$inputData = $r->getInputData();
 
-        foreach ($inputData as $field => $inputValue) {
-            if (!in_array($field, $allowedFields)) {
-                $this->addError($field, "Unknown input field '{$field}'");
-                continue;
-            }
-
-            if ($this->isInputDataFieldReuqired($field) && (is_null($inputValue) || $inputValue === '')) {
-                $this->addError($field, "Field '{$field}' is required, but is missing or has empty value");
-            }
+        foreach ($inputData as $field => $value) {
+	    $this->validateField($field, $value);
         }
+    }
+
+    protected function validateField(string $field, $value, $fieldPath = NULL) {
+	$path = ltrim($fieldPath . RequestParam::NAME_PATH_SEPARATOR . $field, RequestParam::NAME_PATH_SEPARATOR);
+	$param = $this->action->getParam($path);
+
+	if (empty($param)) {
+	    $this->addError($field, sprintf("Unknown input field '%s'", $field));
+	    return;
+	}
+
+	if ($param->isRequired() && $this->isValueEmpty($value)) {
+	    $this->addError($field, sprintf("Field '%s' is required, but is missing or has empty value", $field));
+	    return;
+	}
+
+	// validate type of param by definition in action
+	$paramType = $param->getDescription()['dataType'];
+	if (
+		!$this->isValueEmpty($value)
+		&& !$this->vf->getValidator(ValidatorFactory::VALIDATOR_DATA_TYPE, $value, FALSE, ['expectedType' => $paramType])->validate()
+	) {
+	    $this->addError($field, sprintf("Field '%s' should be of type '%s', but '%s' given", $field, $paramType, gettype($value)));
+	    return;
+	}
+
+	if (is_array($value)) {
+	    foreach ($value as $key => $v) {
+		$this->validateField($key, $v, $path);
+	    }
+	}
     }
 
     public function isValid(): bool {
@@ -57,38 +83,12 @@ class Base implements IActionValidator {
         $this->errors = [];
     }
 
-    public function addError(string $key, string $message) {
+    protected function addError(string $key, string $message) {
         $this->errors[$key] = $message;
     }
 
-    public function isInputDataFieldReuqired(string $field): bool {
-        $requiredFields = $this->getRequiredInputFields();
-        return in_array($field, $requiredFields) || $requiredFields[0] === self::REQUIRED_FIELDS_ALL;
-    }
-
-    public function getAllowedInputFields(): array {
-        return $this->allowedFields;
-    }
-
-    public function setAllowedInputFields(array $fields) {
-        $this->allowedFields = $fields;
-    }
-
-    public function getRequiredInputFields(): array {
-        return $this->requiredFields;
-    }
-
-    public function setRequiredInputFields(array $requiredFields) {
-        $this->requiredFields = $requiredFields;
-    }
-
-    protected function completeInputData(array &$input) {
-        $allowedFields = $this->getAllowedInputFields();
-        foreach ($allowedFields as $field) {
-            if (!key_exists($field, $input)) {
-                $input[$field] = NULL;
-            }
-        }
+    protected function isValueEmpty($value): bool {
+	return is_null($value) || $value === '' || $value === [];
     }
 
 }

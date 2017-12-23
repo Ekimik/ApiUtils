@@ -8,13 +8,28 @@
             "homepage": "http://www.janjisa.cz"
         }
     ],
-    "config": {
-        "vendor-dir": "libs"
+    "autoload": {
+        "psr-4": {
+            "Ekimik\\ApiUtils\\": "src/",
+            "Ekimik\\ApiUtils\\Tests\\": "tests/"
+        }
     },
     "require": {
         "php": ">= 7.0",
         "nette/utils": "^2.4.0",
         "nette/robot-loader": "^2.4.0",
-        "phpunit/phpunit": "^5.7.0"
-    }
+        "phpunit/phpunit": "^5.7.0",
+        "Ekimik/ApiDesc": "dev-master",
+        "Ekimik/Validators": "^2.1.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Ekimik/Validators.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Ekimik/ApiDesc.git"
+        }
+    ]
 }

@@ -3,63 +3,124 @@
 namespace Ekimik\ApiUtils\Tests\ActionValidator;
 
 use \Ekimik\ApiUtils\ActionValidator\Base;
+use \Ekimik\Validators\ValidatorFactory;
+use \Ekimik\ApiDesc\Resource\Action;
+use \Ekimik\ApiDesc\Param\Request as RequestParam;
+use \Ekimik\ApiUtils\Resource\Request;
+use \Ekimik\ApiUtils\InputData\Completion;
 
 /**
  * @author Jan Jíša <j.jisa@seznam.cz>
- * @package ClubManager\FileApi
+ * @package Ekimik\ApiUtils
  */
 class BaseTest extends \PHPUnit_Framework_TestCase {
 
+    /** @var Base */
+    private $object;
+    /** @var Action */
+    private $action;
+
+    protected function setUp() {
+	parent::setUp();
+
+	$this->action = new Action('foobar', 'GET');
+	$this->action->addParam(new RequestParam('foo', 'string', FALSE));
+	$this->action->addParam(new RequestParam('bar', 'integer'));
+	$rp = new RequestParam('baz', 'array');
+	$rp->addParam(new RequestParam('barbar', 'boolean'));
+	$rpSub2 = new RequestParam('bazbaz', 'array');
+	$rpSub2->addParam(new RequestParam('param1', 'string'));
+	$rpSub2->addParam(new RequestParam('param2', 'float', FALSE));
+	$rp->addParam($rpSub2);
+	$this->action->addParam($rp);
+
+	$this->object = new Base($this->action, new ValidatorFactory());
+    }
+
     /**
-     * @covers Base::validate
-     * @covers Base::isInputDataFieldReuqired
-     * @covers Base::addError
-     * @covers Base::isValid
+     * @covers Base
      */
     public function testValidate() {
-        $validator = new Base();
-        $data = ['foo' => 'bar'];
-        $validator->validate($data);
+	$input = [
+	    'foo' => 'asds',
+	    'bar' => 1234,
+	    'baz' => [
+		'barbar' => FALSE
+	    ],
+	    'some_val' => NULL,
+	];
+	$r = new Request($input, $this->action, new Completion());
+	$this->object->validate($r);
+	$this->assertFalse($this->object->isValid());
+	$errors = $this->object->getErrors();
+	$assert = [
+	    'param1' => 'Field \'param1\' is required, but is missing or has empty value',
+	    'some_val' => 'Unknown input field \'some_val\'',
+	];
+	$this->assertEquals($assert, $errors);
 
-        $this->assertFalse($validator->isValid());
-        $errors = [
-            'foo' => 'Unknown input field \'foo\'',
-        ];
-        $this->assertEquals($errors, $validator->getErrors());
+	$input = [
+	    'bar' => 1234,
+	    'baz' => [
+		'barbar' => FALSE
+	    ],
+	];
+	$r = new Request($input, $this->action, new Completion());
+	$this->object->validate($r);
+	$this->assertFalse($this->object->isValid());
+	$errors = $this->object->getErrors();
+	$assert = [
+	    'param1' => 'Field \'param1\' is required, but is missing or has empty value',
+	];
+	$this->assertEquals($assert, $errors);
 
-        $validator = new Base();
-        $validator->setAllowedInputFields(['foo', 'bar', 'baz', 'foobar']);
-        $data = ['foo' => 'barbar', 'baz' => NULL, 'foobar' => ''];
-        $validator->validate($data);
+	$input = [
+	    'foo' => FALSE,
+	    'bar' => 'asds',
+	    'baz' => [
+		'barbar' => 1.5,
+		'bazbaz' => 1
+	    ],
+	];
+	$r = new Request($input, $this->action, new Completion());
+	$this->object->validate($r);
+	$this->assertFalse($this->object->isValid());
+	$errors = $this->object->getErrors();
+	$assert = [
+	    'foo' => 'Field \'foo\' should be of type \'string\', but \'boolean\' given',
+	    'bar' => 'Field \'bar\' should be of type \'integer\', but \'string\' given',
+	    'barbar' => 'Field \'barbar\' should be of type \'boolean\', but \'double\' given',
+	    'bazbaz' => 'Field \'bazbaz\' should be of type \'array\', but \'integer\' given',
+	];
+	$this->assertEquals($assert, $errors);
 
-        $this->assertFalse($validator->isValid());
-        $errors = [
-            'bar' => 'Field \'bar\' is required, but is missing or has empty value',
-            'baz' => 'Field \'baz\' is required, but is missing or has empty value',
-            'foobar' => 'Field \'foobar\' is required, but is missing or has empty value',
-        ];
-        $this->assertEquals($errors, $validator->getErrors());
+	$input = [
+	    'foo' => 'asds',
+	    'bar' => 1234,
+	    'baz' => [
+		'barbar' => FALSE,
+		'bazbaz' => [
+		    'param1' => 'dsas',
+		    'param2' => 1.6,
+		]
+	    ],
+	];
+	$r = new Request($input, $this->action, new Completion());
+	$this->object->validate($r);
+	$this->assertTrue($this->object->isValid());
 
-        $validator = new Base();
-        $validator->setAllowedInputFields(['foo']);
-        $data = ['foo' => 'barbar'];
-        $validator->validate($data);
-        $this->assertTrue($validator->isValid());
-
-        $validator = new Base();
-        $validator->setAllowedInputFields(['foo', 'bar', 'baz']);
-        $validator->setRequiredInputFields(['foo']);
-        $data = ['foo' => 'trololol'];
-        $validator->validate($data);
-        $this->assertTrue($validator->isValid());
-
-        $data = [];
-        $validator->validate($data);
-        $this->assertFalse($validator->isValid());
-        $errors = [
-            'foo' => 'Field \'foo\' is required, but is missing or has empty value',
-        ];
-        $this->assertEquals($errors, $validator->getErrors());
+	$input = [
+	    'bar' => 1234,
+	    'baz' => [
+		'barbar' => FALSE,
+		'bazbaz' => [
+		    'param1' => 'dsas',
+		]
+	    ],
+	];
+	$r = new Request($input, $this->action, new Completion());
+	$this->object->validate($r);
+	$this->assertTrue($this->object->isValid());
     }
 
 }
