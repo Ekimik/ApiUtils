@@ -18,6 +18,8 @@ class Request {
     /** @var array */
     protected $inputData;
 
+    private $completed = FALSE;
+
     public function __construct(array $inputData, Action $action, Completion $completion) {
 	$this->inputData = $inputData;
 	$this->action = $action;
@@ -25,8 +27,16 @@ class Request {
     }
 
     public function getInputData(): array {
-	$this->completion->complete($this->inputData, $this->action);
+	if (!$this->isCompleted()) {
+	    $this->completion->complete($this->inputData, $this->action);
+	    $this->completed = TRUE;
+	}
+
 	return $this->inputData;
+    }
+
+    public function isCompleted(): bool {
+	return $this->completed;
     }
 
 }

@@ -23,8 +23,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
 
 	$inputData = ['bar' => 123];
 	$r = new Request($inputData, $action, new Completion());
+	$this->assertFalse($r->isCompleted());
 	$reqData = $r->getInputData();
 	$this->assertEquals(['foo' => NULL, 'bar' => 123], $reqData);
+	$this->assertTrue($r->isCompleted());
     }
 
 }
