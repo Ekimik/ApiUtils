@@ -41,7 +41,7 @@ class Response {
 	return $this->response['responseData'];
     }
 
-    public function getResponse(): IResource {
+    public function getResponse(): array {
 	return $this->response;
     }
 

@@ -17,31 +17,31 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
      * @covers Response::getData
      */
     public function testResponse() {
-	$decorator = new Response();
-	$this->assertEmpty($decorator->getData());
-	$this->assertEmpty($decorator->getErrors());
+	$r = new Response();
+	$this->assertEmpty($r->getData());
+	$this->assertEmpty($r->getErrors());
 
 	$data = [
 	    'foo' => 'bar',
 	    'baz' => 'barbar',
 	    'list' => [1, 2, 3]
 	];
-	$decorator = new Response($data);
-	$this->assertEquals($data, $decorator->getData());
-	$this->assertEmpty($decorator->getErrors());
+	$r = new Response($data);
+	$this->assertEquals($data, $r->getData());
+	$this->assertEmpty($r->getErrors());
 
-	$decorator->addError(['message' => 'Error message']);
-	$this->assertEquals($data, $decorator->getData());
-	$this->assertEquals([['message' => 'Error message']], $decorator->getErrors());
+	$r->addError(['message' => 'Error message']);
+	$this->assertEquals($data, $r->getData());
+	$this->assertEquals([['message' => 'Error message']], $r->getErrors());
 
 	$data = [
 	    'title' => 'Some title',
 	    'message' => 'Some long message',
 	    'errors' => [['message' => 'Some error message']]
 	];
-	$decorator = new Response($data);
-	$this->assertEquals(['title' => 'Some title', 'message' => 'Some long message'], $decorator->getData());
-	$this->assertEquals([['message' => 'Some error message']], $decorator->getErrors());
+	$r = new Response($data);
+	$this->assertEquals(['title' => 'Some title', 'message' => 'Some long message'], $r->getData());
+	$this->assertEquals([['message' => 'Some error message']], $r->getErrors());
 
 	$data = [
 	    [
@@ -63,7 +63,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 		]
 	    ],
 	];
-	$decorator = new Response($data);
+	$r = new Response($data);
 
 	$resData = [
 	    [
@@ -79,13 +79,13 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 		'message' => 'Some long message',
 	    ],
 	];
-	$this->assertEquals($resData, $decorator->getData());
+	$this->assertEquals($resData, $r->getData());
 
 	$errors = [
 	    ['message' => 'Some error message'],
 	    ['message' => 'Some error message 3']
 	];
-	$this->assertEquals($errors, $decorator->getErrors());
+	$this->assertEquals($errors, $r->getErrors());
     }
 
 }
