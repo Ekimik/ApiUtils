@@ -12,20 +12,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ekimik/ApiDesc.git",
-                "reference": "263f87e3e5fa28edebadc218918a3ddf3fe94afb"
+                "reference": "0b16f884512fbc135213f3c0175776f219a6cbf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ekimik/ApiDesc/zipball/263f87e3e5fa28edebadc218918a3ddf3fe94afb",
-                "reference": "263f87e3e5fa28edebadc218918a3ddf3fe94afb",
+                "url": "https://api.github.com/repos/Ekimik/ApiDesc/zipball/0b16f884512fbc135213f3c0175776f219a6cbf1",
+                "reference": "0b16f884512fbc135213f3c0175776f219a6cbf1",
                 "shasum": ""
             },
             "require": {
-                "nette/robot-loader": "^2.4.0",
                 "nette/utils": "^2.4.0",
-                "php": ">= 7.0"
-            },
-            "require-dev": {
+                "php": ">= 7.0",
                 "phpunit/phpunit": "^5.7.0"
             },
             "type": "library",
@@ -47,7 +44,7 @@
                 "source": "https://github.com/Ekimik/ApiDesc/tree/master",
                 "issues": "https://github.com/Ekimik/ApiDesc/issues"
             },
-            "time": "2017-12-03T22:27:24+00:00"
+            "time": "2017-12-25T15:55:23+00:00"
         },
         {
             "name": "Ekimik/Validators",
