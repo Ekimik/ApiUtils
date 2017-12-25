@@ -34,7 +34,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase {
 	$rp->addParam($rpSub2);
 	$this->action->addParam($rp);
 
-	$this->object = new Base($this->action, new ValidatorFactory());
+	$this->object = new Base(new ValidatorFactory());
     }
 
     /**

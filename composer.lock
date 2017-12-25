@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b74305084002c94f0efcb5bed0d684a4",
+    "content-hash": "4f621bc101962b845f303fc03d4485e5",
     "packages": [
         {
             "name": "Ekimik/ApiDesc",

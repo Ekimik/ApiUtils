@@ -2,7 +2,6 @@
 
 namespace Ekimik\ApiUtils\ActionValidator;
 
-use \Ekimik\ApiDesc\Resource\Action;
 use \Ekimik\ApiDesc\Param\Request as RequestParam;
 use \Ekimik\ApiUtils\Resource\Request;
 use \Ekimik\Validators\ValidatorFactory;
@@ -17,11 +16,11 @@ class Base implements IActionValidator {
 
     /** @var ValidatorFactory */
     protected $vf;
-    /** @var Action */
-    protected $action;
 
-    public function __construct(Action $action, ValidatorFactory $vf) {
-	$this->action = $action;
+    /** @var Request */
+    private $request;
+
+    public function __construct(ValidatorFactory $vf) {
 	$this->vf = $vf;
 
         $this->init();
@@ -36,6 +35,7 @@ class Base implements IActionValidator {
     }
 
     public function validate(Request $r) {
+	$this->request = $r;
 	$this->clearErrors();
 	$inputData = $r->getInputData();
 
@@ -46,7 +46,7 @@ class Base implements IActionValidator {
 
     protected function validateField(string $field, $value, $fieldPath = NULL) {
 	$path = ltrim($fieldPath . RequestParam::NAME_PATH_SEPARATOR . $field, RequestParam::NAME_PATH_SEPARATOR);
-	$param = $this->action->getParam($path);
+	$param = $this->request->getAction()->getParam($path);
 
 	if (empty($param)) {
 	    $this->addError($field, sprintf("Unknown input field '%s'", $field));
