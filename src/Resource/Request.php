@@ -35,6 +35,10 @@ class Request {
 	return $this->inputData;
     }
 
+    public function getAction(): Action {
+	return $this->action;
+    }
+
     public function isCompleted(): bool {
 	return $this->completed;
     }
