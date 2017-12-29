@@ -1,11 +1,12 @@
 {
-    "name": "Ekimik/ApiUtils",
+    "name": "ekimik/apiutils",
     "description": "Simple bundle of util classes created to simplify work with APIs.",
+    "license": "Mozilla Public License 2.0",
     "authors": [
         {
             "name": "Jan Jíša",
             "email": "j.jisa@seznam.cz",
-            "homepage": "http://www.janjisa.cz"
+            "homepage": "https://about.me/jan-jisa"
         }
     ],
     "autoload": {
@@ -18,17 +19,7 @@
         "php": ">= 7.0",
         "nette/utils": "^2.4.0",
         "phpunit/phpunit": "^5.7.0",
-        "Ekimik/ApiDesc": "dev-master",
-        "Ekimik/Validators": "^2.1.0"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Ekimik/Validators.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Ekimik/ApiDesc.git"
-        }
-    ]
+        "ekimik/apidesc": "dev-master",
+        "ekimik/validators": "^2.1.0"
+    }
 }

@@ -4,89 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f621bc101962b845f303fc03d4485e5",
+    "content-hash": "b72bd9b671c10e3c2f90a7456ef30646",
     "packages": [
-        {
-            "name": "Ekimik/ApiDesc",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Ekimik/ApiDesc.git",
-                "reference": "0b16f884512fbc135213f3c0175776f219a6cbf1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Ekimik/ApiDesc/zipball/0b16f884512fbc135213f3c0175776f219a6cbf1",
-                "reference": "0b16f884512fbc135213f3c0175776f219a6cbf1",
-                "shasum": ""
-            },
-            "require": {
-                "nette/utils": "^2.4.0",
-                "php": ">= 7.0",
-                "phpunit/phpunit": "^5.7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ekimik\\ApiDesc\\": "src/",
-                    "Ekimik\\ApiDesc\\Tests\\": "tests/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Jan Jíša",
-                    "email": "j.jisa@seznam.cz",
-                    "homepage": "https://about.me/jan-jisa"
-                }
-            ],
-            "description": "Simple lib for describe some API",
-            "support": {
-                "source": "https://github.com/Ekimik/ApiDesc/tree/master",
-                "issues": "https://github.com/Ekimik/ApiDesc/issues"
-            },
-            "time": "2017-12-25T15:55:23+00:00"
-        },
-        {
-            "name": "Ekimik/Validators",
-            "version": "2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Ekimik/Validators.git",
-                "reference": "3e72b05194b1ce7a1d3fdb6d2179c387e16d9682"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Ekimik/Validators/zipball/3e72b05194b1ce7a1d3fdb6d2179c387e16d9682",
-                "reference": "3e72b05194b1ce7a1d3fdb6d2179c387e16d9682",
-                "shasum": ""
-            },
-            "require": {
-                "nette/robot-loader": "^2.4.0",
-                "nette/utils": "^2.4.0",
-                "php": ">= 7",
-                "phpunit/phpunit": "^5.7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ekimik\\Validators\\": "src/",
-                    "Ekimik\\Validators\\Tests\\": "tests/src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Jan Jíša",
-                    "email": "j.jisa@seznam.cz",
-                    "homepage": "http://www.janjisa.cz"
-                }
-            ],
-            "description": "Simple bundle of validators for different usecases.",
-            "support": {
-                "source": "https://github.com/Ekimik/Validators/tree/2.3.1",
-                "issues": "https://github.com/Ekimik/Validators/issues"
-            },
-            "time": "2017-12-04T00:05:40+00:00"
-        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
@@ -142,6 +61,86 @@
             "time": "2015-06-14T21:17:01+00:00"
         },
         {
+            "name": "ekimik/apidesc",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ekimik/ApiDesc.git",
+                "reference": "e383dfeff6a74c940885e0936d484f8e0a2cbf71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ekimik/ApiDesc/zipball/e383dfeff6a74c940885e0936d484f8e0a2cbf71",
+                "reference": "e383dfeff6a74c940885e0936d484f8e0a2cbf71",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^2.4.0",
+                "php": ">= 7.0",
+                "phpunit/phpunit": "^5.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ekimik\\ApiDesc\\": "src/",
+                    "Ekimik\\ApiDesc\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Mozilla Public License 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Jíša",
+                    "email": "j.jisa@seznam.cz",
+                    "homepage": "https://about.me/jan-jisa"
+                }
+            ],
+            "description": "Simple lib for describe some API",
+            "time": "2017-12-29T19:57:16+00:00"
+        },
+        {
+            "name": "ekimik/validators",
+            "version": "2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ekimik/Validators.git",
+                "reference": "60ec81f7fb4a0f933a8f33d5e6f8577b1b54f327"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ekimik/Validators/zipball/60ec81f7fb4a0f933a8f33d5e6f8577b1b54f327",
+                "reference": "60ec81f7fb4a0f933a8f33d5e6f8577b1b54f327",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^2.4.0",
+                "php": ">= 7",
+                "phpunit/phpunit": "^5.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ekimik\\Validators\\": "src/",
+                    "Ekimik\\Validators\\Tests\\": "tests/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Mozilla Public License 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Jíša",
+                    "email": "j.jisa@seznam.cz",
+                    "homepage": "http://www.janjisa.cz"
+                }
+            ],
+            "description": "Simple bundle of validators for different usecases.",
+            "time": "2017-12-29T19:59:37+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.7.0",
             "source": {
@@ -185,190 +184,6 @@
                 "object graph"
             ],
             "time": "2017-10-19T19:58:43+00:00"
-        },
-        {
-            "name": "nette/caching",
-            "version": "v2.5.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/caching.git",
-                "reference": "1231735b5135ca02bd381b70482c052d2a90bdc9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/caching/zipball/1231735b5135ca02bd381b70482c052d2a90bdc9",
-                "reference": "1231735b5135ca02bd381b70482c052d2a90bdc9",
-                "shasum": ""
-            },
-            "require": {
-                "nette/finder": "^2.2 || ~3.0.0",
-                "nette/utils": "^2.4 || ~3.0.0",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
-            },
-            "require-dev": {
-                "latte/latte": "^2.4",
-                "nette/di": "^2.4 || ~3.0.0",
-                "nette/tester": "^2.0",
-                "tracy/tracy": "^2.4"
-            },
-            "suggest": {
-                "ext-pdo_sqlite": "to use SQLiteStorage or SQLiteJournal"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "⏱ Nette Caching: library with easy-to-use API and many cache backends.",
-            "homepage": "https://nette.org",
-            "keywords": [
-                "cache",
-                "journal",
-                "memcached",
-                "nette",
-                "sqlite"
-            ],
-            "time": "2017-08-30T12:12:25+00:00"
-        },
-        {
-            "name": "nette/finder",
-            "version": "v2.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/finder.git",
-                "reference": "4d43a66d072c57d585bf08a3ef68d3587f7e9547"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/finder/zipball/4d43a66d072c57d585bf08a3ef68d3587f7e9547",
-                "reference": "4d43a66d072c57d585bf08a3ef68d3587f7e9547",
-                "shasum": ""
-            },
-            "require": {
-                "nette/utils": "^2.4 || ~3.0.0",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
-            },
-            "require-dev": {
-                "nette/tester": "^2.0",
-                "tracy/tracy": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "Nette Finder: Files Searching",
-            "homepage": "https://nette.org",
-            "time": "2017-07-10T23:47:08+00:00"
-        },
-        {
-            "name": "nette/robot-loader",
-            "version": "v2.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/robot-loader.git",
-                "reference": "73149b9724ca24c1215b5d53860b77f113bcf063"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/73149b9724ca24c1215b5d53860b77f113bcf063",
-                "reference": "73149b9724ca24c1215b5d53860b77f113bcf063",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "nette/caching": "~2.2",
-                "nette/finder": "~2.3",
-                "nette/utils": "~2.4",
-                "php": ">=5.6.0"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
-            },
-            "require-dev": {
-                "nette/tester": "~2.0",
-                "tracy/tracy": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "Nette RobotLoader: comfortable autoloading",
-            "homepage": "https://nette.org",
-            "time": "2017-07-11T00:21:10+00:00"
         },
         {
             "name": "nette/utils",
