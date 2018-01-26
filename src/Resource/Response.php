@@ -12,7 +12,7 @@ class Response {
 
     public function __construct(array $data = []) {
 	$this->init();
-	$this->fillResponse($data);
+	$this->fillResponse($data, $this->response['responseData']);
     }
 
     public function addError(array $error) {
@@ -50,21 +50,17 @@ class Response {
 	$this->response['responseData'] = [];
     }
 
-    protected function fillResponse(array $data, $index = NULL) {
+    protected function fillResponse(array $data, &$current) {
 	foreach ($data as $key => $value) {
 	    if ($key === 'errors') {
 		$this->addErrors($value);
 		continue;
 	    }
 
-	    if (is_int($key)) {
-		$this->fillResponse($value, $key);
+	    if (is_array($value)) {
+		$this->fillResponse($value, $current[$key]);
 	    } else {
-		if (!is_null($index)) {
-		    $this->response['responseData'][$index][$key] = $value;
-		} else {
-		    $this->response['responseData'][$key] = $value;
-		}
+		$current[$key] = $value;
 	    }
 	}
     }

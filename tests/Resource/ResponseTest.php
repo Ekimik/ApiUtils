@@ -24,7 +24,14 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 	$data = [
 	    'foo' => 'bar',
 	    'baz' => 'barbar',
-	    'list' => [1, 2, 3]
+	    'list1' => [1, 2, 3],
+	    'list2' => ['foobar' => 'barbar'],
+	    'list3' => [
+		'list' => [
+		    [1, 2, 3],
+		    [4, 5, 6],
+		],
+	    ],
 	];
 	$r = new Response($data);
 	$this->assertEquals($data, $r->getData());
