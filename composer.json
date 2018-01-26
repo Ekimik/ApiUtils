@@ -1,7 +1,7 @@
 {
     "name": "ekimik/apiutils",
     "description": "Simple bundle of util classes created to simplify work with APIs.",
-    "license": "Mozilla Public License 2.0",
+    "license": "MPL-2.0",
     "authors": [
         {
             "name": "Jan Jíša",
