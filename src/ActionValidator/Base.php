@@ -68,7 +68,7 @@ class Base implements IActionValidator {
 	    return;
 	}
 
-	if (is_array($value)) {
+	if (is_array($value) && $this->validateFieldRecursivelly($field)) {
 	    foreach ($value as $key => $v) {
 		$this->validateField($key, $v, $path);
 	    }
@@ -89,6 +89,10 @@ class Base implements IActionValidator {
 
     protected function isValueEmpty($value): bool {
 	return is_null($value) || $value === '' || $value === [];
+    }
+
+    protected function validateFieldRecursivelly(string $field): bool {
+	return TRUE;
     }
 
 }
