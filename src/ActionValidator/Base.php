@@ -68,7 +68,7 @@ class Base implements IActionValidator {
 	    return;
 	}
 
-	if (is_array($value) && $this->validateFieldRecursivelly($field)) {
+	if (is_array($value) && $this->validateFieldRecursively($field)) {
 	    foreach ($value as $key => $v) {
 		$this->validateField($key, $v, $path);
 	    }
