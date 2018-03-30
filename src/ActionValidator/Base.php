@@ -91,7 +91,7 @@ class Base implements IActionValidator {
 	return is_null($value) || $value === '' || $value === [];
     }
 
-    protected function validateFieldRecursivelly(string $field): bool {
+    protected function validateFieldRecursively(string $field): bool {
 	return TRUE;
     }
 
