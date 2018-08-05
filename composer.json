@@ -19,7 +19,7 @@
         "php": ">= 7.0",
         "nette/utils": "^2.4.0",
         "phpunit/phpunit": "^5.7.0",
-        "ekimik/apidesc": "dev-master",
+        "ekimik/apidesc": "^1.0.0",
         "ekimik/validators": "^2.1.0"
     }
 }
