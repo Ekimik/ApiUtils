@@ -5,6 +5,7 @@ namespace Ekimik\ApiUtils\ActionValidator;
 use \Ekimik\ApiDesc\Param\Request as RequestParam;
 use \Ekimik\ApiUtils\Resource\Request;
 use \Ekimik\Validators\ValidatorFactory;
+use \Ekimik\Validators\DataType;
 
 /**
  * @author Jan Jíša <j.jisa@seznam.cz>
@@ -60,9 +61,13 @@ class Base implements IActionValidator {
 
 	// validate type of param by definition in action
 	$paramType = $param->getDescription()['dataType'];
+	$dtOptions = [
+	    DataType::OPTION_DATA_TYPE => $paramType,
+	    DataType::OPTION_REQUIRED => FALSE,
+	];
 	if (
 		!$this->isValueEmpty($value)
-		&& !$this->vf->getValidator(ValidatorFactory::VALIDATOR_DATA_TYPE, $value, FALSE, ['expectedType' => $paramType])->validate()
+		&& !$this->vf->create(ValidatorFactory::VALIDATOR_DATA_TYPE, $value, $dtOptions)->validate()
 	) {
 	    $this->addError($field, sprintf("Field '%s' should be of type '%s', but '%s' given", $field, $paramType, gettype($value)));
 	    return;

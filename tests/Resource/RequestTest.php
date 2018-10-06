@@ -11,7 +11,7 @@ use \Ekimik\ApiDesc\Param\Request as RequestParam;
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class RequestTest extends \PHPUnit_Framework_TestCase {
+class RequestTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @covers Request

@@ -8,7 +8,7 @@ use \Ekimik\ApiUtils\Resource\Response;
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class ResponseTest extends \PHPUnit_Framework_TestCase {
+class ResponseTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @covers Response::addErrors

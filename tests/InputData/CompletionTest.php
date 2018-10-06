@@ -10,7 +10,7 @@ use \Ekimik\ApiDesc\Param\Request as RequestParam;
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class CompletionTest extends \PHPUnit_Framework_TestCase {
+class CompletionTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @covers Completion::complete

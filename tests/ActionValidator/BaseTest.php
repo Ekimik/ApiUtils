@@ -13,7 +13,7 @@ use \Ekimik\ApiUtils\InputData\Completion;
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class BaseTest extends \PHPUnit_Framework_TestCase {
+class BaseTest extends \PHPUnit\Framework\TestCase {
 
     /** @var Base */
     private $object;

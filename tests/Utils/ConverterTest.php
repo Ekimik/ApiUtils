@@ -8,7 +8,7 @@ use Ekimik\ApiUtils\Utils\Converter;
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
  */
-class ConverterTest extends \PHPUnit_Framework_TestCase {
+class ConverterTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @covers Converter::convertPresenterNameToResource
