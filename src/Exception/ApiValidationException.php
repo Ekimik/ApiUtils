@@ -1,6 +1,6 @@
 <?php
 
-namespace Ekimik\AuthApi\Exceptions;
+namespace Ekimik\ApiUtils\Exceptions;
 
 class ApiValidationException extends ApiException {
 
