@@ -1,3 +1,4 @@
 # general ignores, rest is in .gitignore files in specific dirs
 vendor
 nbproject/
+.idea/
