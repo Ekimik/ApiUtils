@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ekimik/apidesc",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ekimik/ApiDesc.git",
-                "reference": "1f36745f5b18cea2ba6894156fc2bbe6a2f45d1f"
+                "reference": "1d884882f33670f3124d8607373c930601f9b6f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ekimik/ApiDesc/zipball/1f36745f5b18cea2ba6894156fc2bbe6a2f45d1f",
-                "reference": "1f36745f5b18cea2ba6894156fc2bbe6a2f45d1f",
+                "url": "https://api.github.com/repos/Ekimik/ApiDesc/zipball/1d884882f33670f3124d8607373c930601f9b6f7",
+                "reference": "1d884882f33670f3124d8607373c930601f9b6f7",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 }
             ],
             "description": "Simple lib for describe some API",
-            "time": "2018-10-13T11:26:44+00:00"
+            "time": "2018-10-14T11:20:26+00:00"
         },
         {
             "name": "ekimik/validators",
