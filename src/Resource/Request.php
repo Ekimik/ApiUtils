@@ -18,29 +18,29 @@ class Request {
     /** @var array */
     protected $inputData;
 
-    private $completed = FALSE;
+    private $completed = false;
 
     public function __construct(array $inputData, Action $action, Completion $completion) {
-	$this->inputData = $inputData;
-	$this->action = $action;
-	$this->completion = $completion;
+        $this->inputData = $inputData;
+        $this->action = $action;
+        $this->completion = $completion;
     }
 
     public function getInputData(): array {
-	if (!$this->isCompleted()) {
-	    $this->completion->complete($this->inputData, $this->action);
-	    $this->completed = TRUE;
-	}
+        if (!$this->isCompleted()) {
+            $this->completion->complete($this->inputData, $this->action);
+            $this->completed = true;
+        }
 
-	return $this->inputData;
+        return $this->inputData;
     }
 
     public function getAction(): Action {
-	return $this->action;
+        return $this->action;
     }
 
     public function isCompleted(): bool {
-	return $this->completed;
+        return $this->completed;
     }
 
 }

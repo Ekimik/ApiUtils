@@ -12,35 +12,34 @@ use \Ekimik\ApiDesc\Param\Request as RequestParam;
 class Completion {
 
     public function complete(array &$inputData, Action $action) {
-	$actionParams = $action->getParams();
-	foreach ($actionParams as $param) {
-	    $this->completeParam($inputData, $param);
-	}
+        $actionParams = $action->getParams();
+        foreach ($actionParams as $param) {
+            $this->completeParam($inputData, $param);
+        }
     }
 
     protected function completeParam(array &$inputData, RequestParam $param) {
-	$paramDesc = $param->getDescription();
-	$paramName = $paramDesc['name'];
+        $paramName = $param->getName();
+        $hasSubParams = $param->hasParams();
 
-	$hasSubParams = $param->hasParams();
-	if (!key_exists($paramName, $inputData)) {
-	    $initialVal = NULL;
-	    if ($hasSubParams) {
-		$initialVal = [];
-	    }
+        if (!key_exists($paramName, $inputData)) {
+            $initialVal = null;
+            if ($hasSubParams) {
+                $initialVal = [];
+            }
 
-	    $inputData[$paramName] = $initialVal;
-	}
+            $inputData[$paramName] = $initialVal;
+        }
 
-	if ($hasSubParams) {
-	    foreach ($param->getParams() as $p) {
-		if (!is_array($inputData[$paramName])) {
-		    continue;
-		}
+        if ($hasSubParams) {
+            foreach ($param->getParams() as $p) {
+                if (!is_array($inputData[$paramName])) {
+                    continue;
+                }
 
-		$this->completeParam($inputData[$paramName], $p);
-	    }
-	}
+                $this->completeParam($inputData[$paramName], $p);
+            }
+        }
     }
 
 }

@@ -16,7 +16,7 @@ class Converter {
      * @return string
      */
     public static function convertPresenterNameToResource(string $presenterName): string {
-	return Strings::substring($presenterName, 0, -9);
+        return Strings::substring($presenterName, 0, -9);
     }
 
 }

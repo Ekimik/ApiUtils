@@ -17,16 +17,16 @@ class RequestTest extends \PHPUnit\Framework\TestCase {
      * @covers Request
      */
     public function testRequest() {
-	$action = new Action('foobar', 'GET');
-	$action->addParam(new RequestParam('foo', 'string', FALSE));
-	$action->addParam(new RequestParam('bar', 'integer'));
+        $action = new Action('foobar', 'GET');
+        $action->addParam(new RequestParam('foo', 'string', false));
+        $action->addParam(new RequestParam('bar', 'integer'));
 
-	$inputData = ['bar' => 123];
-	$r = new Request($inputData, $action, new Completion());
-	$this->assertFalse($r->isCompleted());
-	$reqData = $r->getInputData();
-	$this->assertEquals(['foo' => NULL, 'bar' => 123], $reqData);
-	$this->assertTrue($r->isCompleted());
+        $inputData = ['bar' => 123];
+        $r = new Request($inputData, $action, new Completion());
+        $this->assertFalse($r->isCompleted());
+        $reqData = $r->getInputData();
+        $this->assertEquals(['foo' => null, 'bar' => 123], $reqData);
+        $this->assertTrue($r->isCompleted());
     }
 
 }
