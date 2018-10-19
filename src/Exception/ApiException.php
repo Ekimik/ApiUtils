@@ -1,6 +1,6 @@
 <?php
 
-namespace Ekimik\ApiUtils\Exceptions;
+namespace Ekimik\ApiUtils\Exception;
 
 class ApiException extends \Exception {
 
