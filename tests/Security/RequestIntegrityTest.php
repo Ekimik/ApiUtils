@@ -16,7 +16,9 @@ class RequestIntegrityTest extends \PHPUnit\Framework\TestCase {
         parent::setUp();
 
         $options = [];
-
+        if (in_array($this->getName(), ['testCheckWrongTimestampKey', 'testCheckMissingTimestampKey'])) {
+            $options[RequestIntegrity::OPTION_TIMESTAMP_KEY] = 'ts';
+        }
 
         $this->object = new RequestIntegrity($this->secret, $options);
     }
@@ -62,6 +64,48 @@ class RequestIntegrityTest extends \PHPUnit\Framework\TestCase {
      */
     public function testCheckWrongInterval() {
         $body = Json::encode(['baz' => 'barbar', '_timestamp' => time() - 10]);
+        $r = new ServerRequest(
+            'POST',
+            '/foo/bar',
+            [
+                'Content-Type' => 'application/json',
+                'X-HTTP-REQ-HASH' => hash_hmac('md5', $body, $this->secret),
+            ],
+            $body
+        );
+
+        $this->object->check($r);
+    }
+
+    /**
+     * @covers RequestIntegrity::check
+     * @expectedException \Ekimik\ApiUtils\Exception\ApiException
+     * @expectedExceptionMessage Timestamp field 'ts' in request data is missing
+     * @expectedExceptionCode 400
+     */
+    public function testCheckWrongTimestampKey() {
+        $body = Json::encode(['baz' => 'barbar', '_timestamp' => time()]);
+        $r = new ServerRequest(
+            'POST',
+            '/foo/bar',
+            [
+                'Content-Type' => 'application/json',
+                'X-HTTP-REQ-HASH' => hash_hmac('md5', $body, $this->secret),
+            ],
+            $body
+        );
+
+        $this->object->check($r);
+    }
+
+    /**
+     * @covers RequestIntegrity::check
+     * @expectedException \Ekimik\ApiUtils\Exception\ApiException
+     * @expectedExceptionMessage Timestamp field 'ts' in request data is missing
+     * @expectedExceptionCode 400
+     */
+    public function testCheckMissingTimestampKey() {
+        $body = Json::encode(['baz' => 'barbar']);
         $r = new ServerRequest(
             'POST',
             '/foo/bar',

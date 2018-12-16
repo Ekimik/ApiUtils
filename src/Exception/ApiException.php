@@ -10,6 +10,13 @@ class ApiException extends \Exception {
         return $this->errors;
     }
 
+    /**
+     * @param array $errors array of arrays with following minimal structure
+     * [
+     *      ["message" => "Some message"],
+     *      ...
+     * ]
+     */
     public function setErrors(array $errors) {
         $this->errors = $errors;
     }

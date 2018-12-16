@@ -38,10 +38,11 @@ class RequestIntegrity {
      * @throws ApiException
      */
     public function check(Request $request) {
-        $reqHash = $request->getHeader($this->options[self::OPTION_INTEGRITY_HEADER]);
+        $options = $this->options;
+        $reqHash = $request->getHeader($options[self::OPTION_INTEGRITY_HEADER]);
         $reqHash = array_reverse($reqHash)[0] ?? null;
         if (empty($reqHash)) {
-            throw new ApiException("Missing request hash header '" . $this->options[self::OPTION_INTEGRITY_HEADER] . "'", 400);
+            throw new ApiException("Missing request hash header '" . $options[self::OPTION_INTEGRITY_HEADER] . "'", 400);
         }
 
         try {
@@ -55,7 +56,7 @@ class RequestIntegrity {
                 $rawData = $request->getBody()->getContents();
             }
 
-            $calcHash = hash_hmac($this->options[self::OPTION_ALGORITHM], $rawData, $this->secret);
+            $calcHash = hash_hmac($options[self::OPTION_ALGORITHM], $rawData, $this->secret);
             if ($calcHash !== $reqHash) {
                 throw new ApiException('Client and server request hash does not match', 422);
             }
@@ -65,14 +66,20 @@ class RequestIntegrity {
                 $data = Json::decode($rawData, Json::FORCE_ARRAY);
             }
 
-            $reqTimestamp = $data[$this->options[self::OPTION_TIMESTAMP_KEY]];
+            $reqTimestamp = $data[$options[self::OPTION_TIMESTAMP_KEY]] ?? null;
+            if (empty($reqTimestamp)) {
+                throw new ApiException("Timestamp field '". $options[self::OPTION_TIMESTAMP_KEY] . "' in request data is missing", 400);
+            }
+
             $diff = time() - $reqTimestamp;
-            if ($diff > $this->options[self::OPTION_VALIDITY_WINDOW]) {
+            if ($diff > $options[self::OPTION_VALIDITY_WINDOW]) {
                 throw new ApiException('Request validity interval exceeded', 422);
             }
         } catch (JsonException $e) {
             $e = new ApiException('Cannot decode request data', 400);
-            $e->setErrors([$e->getMessage()]);
+            $e->setErrors([
+                ['message' => $e->getMessage()]
+            ]);
         }
 
         return true;
