@@ -33,18 +33,16 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase {
      * @covers Authorization::getAuthParams
      */
     public function testGetAuthParams() {
-        $this->object->who('fooUser')
-            ->where('foo', 'read')
+        $this->object->where('foo', 'read')
             ->against('user/auth')
             ->withToken('123456');
 
         $params = $this->object->getAuthParams();
         $this->assertEquals('user/auth', $params['endpoint']);
-        $this->assertCount(6, $params['body']);
+        $this->assertCount(5, $params['body']);
         $this->assertNotEmpty($params['body']['ts']);
         $this->assertEquals('foobar', $params['body']['client']);
         $this->assertEquals('123456', $params['body']['_token']);
-        $this->assertEquals('fooUser', $params['body']['userId']);
         $this->assertEquals('foo', $params['body']['resource']);
         $this->assertEquals('read', $params['body']['privilege']);
     }

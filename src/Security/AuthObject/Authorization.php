@@ -35,12 +35,6 @@ class Authorization {
         return $this;
     }
 
-    public function who($userId) {
-        $key = $this->props[self::PROP_USER];
-        $this->data['body'][$key] = $userId;
-        return $this;
-    }
-
     public function where(string $resource, string $privilege) {
         $key = $this->props[self::PROP_RESOURCE];
         $this->data['body'][$key] = $resource;

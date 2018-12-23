@@ -41,7 +41,7 @@ class AuthorizatorTest extends \PHPUnit\Framework\TestCase {
      * @expectedExceptionMessage Undefined API authorization endpoint
      */
     public function testAuthorizeWrongAuthParams() {
-        $this->object->createAuthRequest('foo')->who('fooUser')->where('foobar', 'read')->against('');
+        $this->object->createAuthRequest('foo')->where('foobar', 'read')->against('');
         $this->object->authorize();
     }
 
