@@ -7,7 +7,6 @@ class Authorization {
     const PROP_TOKEN = 'token';
     const PROP_TIMESTAMP = 'timestamp';
     const PROP_CLIENT_IDENT = 'clientIdent';
-    const PROP_USER = 'user';
     const PROP_RESOURCE = 'resource';
     const PROP_PRIVILEGE = 'privilege';
 
@@ -15,7 +14,6 @@ class Authorization {
         self::PROP_TOKEN => '_token',
         self::PROP_TIMESTAMP => '_timestamp',
         self::PROP_CLIENT_IDENT => '_clientIdent',
-        self::PROP_USER => 'userId',
         self::PROP_RESOURCE => 'resource',
         self::PROP_PRIVILEGE => 'privilege',
     ];
