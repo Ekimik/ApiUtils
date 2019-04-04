@@ -39,10 +39,10 @@ class AuthorizationTest extends \PHPUnit\Framework\TestCase {
 
         $params = $this->object->getAuthParams();
         $this->assertEquals('user/auth', $params['endpoint']);
-        $this->assertCount(5, $params['body']);
+        $this->assertCount(4, $params['body']);
         $this->assertNotEmpty($params['body']['ts']);
         $this->assertEquals('foobar', $params['body']['client']);
-        $this->assertEquals('123456', $params['body']['_token']);
+        $this->assertEquals('123456', $params['headers']['X-AUTH-TOKEN']);
         $this->assertEquals('foo', $params['body']['resource']);
         $this->assertEquals('read', $params['body']['privilege']);
     }

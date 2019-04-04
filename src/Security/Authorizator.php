@@ -49,6 +49,7 @@ class Authorizator {
                 $authParams['endpoint'],
                 [
                     RequestOptions::QUERY => $authParams['body'],
+                    RequestOptions::HEADERS => $authParams['headers'],
                 ]
             );
 

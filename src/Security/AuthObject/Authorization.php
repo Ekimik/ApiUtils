@@ -11,7 +11,7 @@ class Authorization {
     const PROP_PRIVILEGE = 'privilege';
 
     private $defaultPropNames = [
-        self::PROP_TOKEN => '_token',
+        self::PROP_TOKEN => 'X-AUTH-TOKEN',
         self::PROP_TIMESTAMP => '_timestamp',
         self::PROP_CLIENT_IDENT => '_clientIdent',
         self::PROP_RESOURCE => 'resource',
@@ -19,38 +19,38 @@ class Authorization {
     ];
 
     private $props;
-    private $data = [];
+    private $authData = [];
 
     public function __construct(string $clientIdent, array $authPropNames = []) {
         $this->props = array_merge($this->defaultPropNames, $authPropNames);
 
         $key = $this->props[self::PROP_CLIENT_IDENT];
-        $this->data['body'][$key] = $clientIdent;
+        $this->authData['body'][$key] = $clientIdent;
     }
 
     public function against(string $endpoint) {
-        $this->data['endpoint'] = $endpoint;
+        $this->authData['endpoint'] = $endpoint;
         return $this;
     }
 
     public function where(string $resource, string $privilege) {
         $key = $this->props[self::PROP_RESOURCE];
-        $this->data['body'][$key] = $resource;
+        $this->authData['body'][$key] = $resource;
 
         $key = $this->props[self::PROP_PRIVILEGE];
-        $this->data['body'][$key] = $privilege;
+        $this->authData['body'][$key] = $privilege;
 
         return $this;
     }
 
     public function withToken(string $token) {
         $key = $this->props[self::PROP_TOKEN];
-        $this->data['body'][$key] = $token;
+        $this->authData['headers'][$key] = $token;
         return $this;
     }
 
     public function getAuthParams(): array {
-        $data = $this->data;
+        $data = $this->authData;
         $data['body'][$this->props[self::PROP_TIMESTAMP]] = (string) time();
 
         return $data;
