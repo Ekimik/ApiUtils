@@ -9,7 +9,7 @@ class ResponseBuilder {
 
 	public static function createErrorResponseFromException(\Throwable $e): Response {
 		$errors = [
-			'message' => $e->getMessage()
+			['message' => $e->getMessage()],
 		];
 
 		if ($e instanceof ApiException) {

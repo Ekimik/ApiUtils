@@ -64,7 +64,7 @@ class ResponseBuilderTest extends \PHPUnit\Framework\TestCase {
 				['message' => 'Foo bar'],
 			],
 		];
-		$this->assertEquals($response, ResponseBuilder::createResponse(['id' => 123], ['message' => 'Foo bar'])->getResponse());
+		$this->assertEquals($response, ResponseBuilder::createResponse(['id' => 123], [['message' => 'Foo bar']])->getResponse());
 	}
 
 }
