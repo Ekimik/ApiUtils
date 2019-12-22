@@ -33,7 +33,7 @@ class ResponseBuilderTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 		$e = new ApiException('Foo bar', 123);
-		$e->setErrors(['message' => 'Foo baz']);
+		$e->setErrors([['message' => 'Foo baz']]);
 		$this->assertEquals($response, ResponseBuilder::createErrorResponseFromException($e)->getResponse());
 	}
 
