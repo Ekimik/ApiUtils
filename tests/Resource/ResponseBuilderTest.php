@@ -23,7 +23,7 @@ class ResponseBuilderTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 		$e = new \Exception('Foo bar', 123);
-		$this->assertEquals($response, ResponseBuilder::createErrorResponseFromException($e));
+		$this->assertEquals($response, ResponseBuilder::createErrorResponseFromException($e)->getResponse());
 
 		$response = [
 			'responseData' => [],
@@ -34,7 +34,7 @@ class ResponseBuilderTest extends \PHPUnit\Framework\TestCase {
 		];
 		$e = new ApiException('Foo bar', 123);
 		$e->setErrors(['message' => 'Foo baz']);
-		$this->assertEquals($response, ResponseBuilder::createErrorResponseFromException($e));
+		$this->assertEquals($response, ResponseBuilder::createErrorResponseFromException($e)->getResponse());
 	}
 
 	/**
@@ -47,14 +47,14 @@ class ResponseBuilderTest extends \PHPUnit\Framework\TestCase {
 				['message' => 'Foo bar'],
 			],
 		];
-		$this->assertEquals($response, ResponseBuilder::createErrorResponse([['message' => 'Foo bar']]));
+		$this->assertEquals($response, ResponseBuilder::createErrorResponse([['message' => 'Foo bar']])->getResponse());
 	}
 
 	/**
 	 * @covers ResponseBuilder::createResponse
 	 */
 	public function testResponse() {
-		$this->assertEquals(['responseData' => [], 'errors' => []], ResponseBuilder::createResponse());
+		$this->assertEquals(['responseData' => [], 'errors' => []], ResponseBuilder::createResponse()->getResponse());
 
 		$response = [
 			'responseData' => [
@@ -64,7 +64,7 @@ class ResponseBuilderTest extends \PHPUnit\Framework\TestCase {
 				['message' => 'Foo bar'],
 			],
 		];
-		$this->assertEquals($response, ResponseBuilder::createResponse(['id' => 123], ['message' => 'Foo bar']));
+		$this->assertEquals($response, ResponseBuilder::createResponse(['id' => 123], ['message' => 'Foo bar'])->getResponse());
 	}
 
 }
