@@ -54,6 +54,7 @@ class RequestIntegrity {
                 $rawData = Json::encode($rawData);
             } else {
                 $rawData = $request->getBody()->getContents();
+            	$request->getBody()->rewind();
             }
 
             $calcHash = hash_hmac($options[self::OPTION_ALGORITHM], $rawData, $this->secret);
