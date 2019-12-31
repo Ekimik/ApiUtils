@@ -2,6 +2,8 @@
 
 namespace Ekimik\ApiUtils\Resource;
 
+use Nette\Utils\Json;
+
 /**
  * @author Jan Jíša <j.jisa@seznam.cz>
  * @package Ekimik\ApiUtils
@@ -45,7 +47,11 @@ class Response {
         return $this->response;
     }
 
-    protected function init() {
+    public function __toString() {
+		return Json::encode($this->getResponse());
+	}
+
+	protected function init() {
         $this->response['errors'] = [];
         $this->response['responseData'] = [];
     }
